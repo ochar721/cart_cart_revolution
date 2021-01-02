@@ -138,8 +138,8 @@ class ShoppingCartTest < Minitest::Test
     cart.add_product(product3)
     cart.add_product(product4)
 
-    assert_equal {:meat => [product2], :paper => [product1, product3], :produce =>[produce4]}, cart.product_breakdown
-
+    assert_equal [{:meat => [product2], :paper => [product1, product3], :produce =>[product4]}], cart.product_breakdown
+  end
 
 
 end

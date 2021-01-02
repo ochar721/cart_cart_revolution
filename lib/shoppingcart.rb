@@ -52,5 +52,9 @@ class ShoppingCart
     end
   end
 
-  
+  # def product_breakdown
+  #   @products.sort_by do |product|
+  #     product
+  #   end
+  # end
 end

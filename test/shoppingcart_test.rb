@@ -66,21 +66,36 @@ class ShoppingCartTest < Minitest::Test
     assert_equal 13, cart.total_number_of_products
   end
 
+  def test_cart_is_full?
+    cart = ShoppingCart.new("King Soopers", "30items")
+    product1 = Product.new(:paper, 'toilet paper', 3.70, '10')
+    product2 = Product.new(:meat, 'chicken', 4.50, '2')
+    product3 = Product.new(:paper, 'tissue paper', 1.25, '1')
+    product4 = Product.new(:produce, 'apples', 0.99, '20')
 
-  # pry(main)> cart.is_full?
-  # #=> false
-  #
-  # pry(main)> product4 = Product.new(:produce, 'apples', 0.99, '20')
-  #
-  # #=> #<Product:0x00007fccd2985f53...>
-  #
-  # pry(main)> cart.add_product(product4)
-  #
-  # pry(main)> cart.is_full?
-  # #=> true
-  #
-  # pry(main)> cart.products_by_category(:paper)
-  # #=> [#<Product:0x00007fccd29b5720...>, #<Product:0x00007fccd2985f51...>]
+    cart.add_product(product1)
+    cart.add_product(product2)
+    cart.add_product(product3)
+
+    assert_equal false, cart.is_full?
+    cart.add_product(product4)
+    assert_equal true, cart.is_full?
+  end
+
+  def test_products_by_category
+    cart = ShoppingCart.new("King Soopers", "30items")
+    product1 = Product.new(:paper, 'toilet paper', 3.70, '10')
+    product2 = Product.new(:meat, 'chicken', 4.50, '2')
+    product3 = Product.new(:paper, 'tissue paper', 1.25, '1')
+    product4 = Product.new(:produce, 'apples', 0.99, '20')
+
+    cart.add_product(product1)
+    cart.add_product(product2)
+    cart.add_product(product3)
+
+
+    assert_equal [product1, product3], cart.products_by_category(:paper)
+  end
 
 
 end

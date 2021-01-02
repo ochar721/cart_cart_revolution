@@ -2,8 +2,7 @@ class Product
   attr_reader :category,
               :name,
               :unit_price,
-              :quantity,
-              :is_hoarded
+              :quantity
 
   def initialize(category, name, unit_price, quantity)
     @category   = category
@@ -11,9 +10,7 @@ class Product
     @unit_price = unit_price
     @quantity   = quantity.to_i
     @hoarded    = false
-
   end
-
 
   def total_price
     @unit_price * @quantity

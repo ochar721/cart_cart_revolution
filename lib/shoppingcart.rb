@@ -8,31 +8,28 @@ class ShoppingCart
     @name     = name
     @capacity = capacity.to_i
     @products = []
-
   end
 
   def add_product(item)
     @products << item
   end
 
-
   def details
-    {:name => "King Soopers",
-     :capacity => @capacity}
+    {name: @name, capacity: @capacity}
   end
 
   def total_number_of_products
     @products.sum do |product|
-    product.quantity
+      product.quantity
     end
   end
 
   def is_full?
-    if total_number_of_products > 30
+    if total_number_of_products >= @capacity
       true
     else
       false
-   end
+    end
   end
 
   def products_by_category(category)
@@ -41,20 +38,19 @@ class ShoppingCart
      end
   end
 
-
   def percentage_occupied
-   (((total_number_of_products.to_f / capacity))*100).round(2)
+   ((total_number_of_products.to_f / capacity.to_f) * 100).round(2)
   end
 
   def sorted_products_by_quantity
     @products.sort_by do |product|
-      -product.quantity
-    end
+      product.quantity
+    end.reverse
   end
 
-  # def product_breakdown
-  #   @products.sort_by do |product|
-  #     product
-  #   end
-  # end
+  def product_breakdown
+    @products.group_by do |product|
+      product.category
+    end.sort.to_h
+  end
 end
